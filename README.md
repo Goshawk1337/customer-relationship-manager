@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+CRM front-end project for my portfolio and for learning purposes. Back-end might be done, but I think its only going to be a front-end project
 
 ## Getting Started
 
