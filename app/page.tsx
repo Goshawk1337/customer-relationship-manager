@@ -1,65 +1,159 @@
-import Image from "next/image";
 
-export default function Home() {
+
+"use server"
+import { DollarSign, DoorClosed, Handshake, User, Users } from "lucide-react";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+function fetchPipeline() {
+  // Mock data only, replace it with real DB logic
+  return {
+    lead: 32,
+    contacted: 18,
+    proposal: 9,
+    negotiation: 5,
+    won: 11,
+  }
+}
+function fetchLatestClients() {
+  // Mock data only, replace it with real DB logic
+
+  return [
+    { id: 1, avatar: "", name: "Client A", company: "", lastContact: "2024-06-10" },
+    { id: 2, avatar: "", name: "Client B", company: "", lastContact: "2024-06-09" },
+    { id: 3, avatar: "", name: "Client C", company: "", lastContact: "2024-06-08" },
+    { id: 4, avatar: "", name: "Client D", company: "", lastContact: "2024-06-07" },
+    { id: 5, avatar: "", name: "Client E", company: "", lastContact: "2024-06-07" },
+  ]
+}
+
+const pipelineItems = [
+  { id: "lead", name: "Lead", count: fetchPipeline().lead, description: "New potential customers awaiting qualification." },
+  { id: "contacted", name: "Contacted", count: fetchPipeline().contacted, description: "Initial outreach made — waiting for response or follow-up." },
+  { id: "proposal", name: "Proposal", count: fetchPipeline().proposal, description: "Proposal sent to the client, pending approval." },
+  { id: "negotiation", name: "Negotiation", count: fetchPipeline().negotiation, description: "Pricing and terms are being negotiated." },
+  { id: "won", name: "Won", count: fetchPipeline().won, description: "Deals closed and revenue recognized." },
+]
+
+export default async function Home() {
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    // important statistics
+    <div className="w-full h-screen flex flex-col p-12 gap-5">
+      <h1 className="text-3xl font-semibold">Statistics</h1>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="w-full max-w-sm min-h-36">
+          <CardHeader>
+            <CardTitle>Total Clients</CardTitle>
+            <CardDescription className="text-primary text-2xl">
+              150 <Users className="inline-block ml-2 mb-1" />
+            </CardDescription>
+          </CardHeader>
+        </Card>
+
+        <Card className="w-full max-w-sm min-h-36">
+          <CardHeader>
+            <CardTitle>Active Deals</CardTitle>
+            <CardDescription className="text-primary text-2xl">
+              32 <Handshake className="inline-block ml-2 mb-1" />
+            </CardDescription>
+          </CardHeader>
+        </Card>
+        <Card className="w-full max-w-sm min-h-36">
+          <CardHeader>
+            <CardTitle>Closed Won</CardTitle>
+            <CardDescription className="text-primary flex-row text-2xl">
+              11 <DoorClosed className="inline-block ml-2 mb-1" />
+            </CardDescription>
+          </CardHeader>
+        </Card>
+        <Card className="w-full max-w-sm min-h-36">
+          <CardHeader>
+            <CardTitle>Revenue - This month</CardTitle>
+            <CardDescription className="text-primary text-2xl">
+              3220 <DollarSign className="inline-block ml-2 mb-1" />
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+      <Separator />
+
+      {/* detailed sections about the five latest clients, and current leads, and deals */}
+
+
+      <div className="w-full flex flex-col md:flex-row items-stretch mt-3 gap-5">
+        <div className="w-full md:flex-1">
+          <h1 className="text-2xl font-semibold">Latest Clients</h1>
+          {fetchLatestClients().map((client) => {
+            const initials = client.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .slice(0, 2)
+              .toUpperCase();
+
+            return (
+              <Item key={client.id} className="mt-3 md:p-3" variant="outline">
+                <ItemMedia>
+                  <Avatar className="h-10 w-10">
+                    {client.avatar ? (
+                      <AvatarImage src={client.avatar} alt={client.name} />
+                    ) : (
+                      <AvatarFallback>{initials}</AvatarFallback>
+                    )}
+                  </Avatar>
+                </ItemMedia>
+
+                <ItemContent>
+                  <ItemTitle>{client.name}</ItemTitle>
+                  <ItemDescription>
+                    <span className="block text-sm">Company: {client.company || "—"}</span>
+                    <span className="block text-sm">Last contacted: {client.lastContact}</span>
+                  </ItemDescription>
+                </ItemContent>
+              </Item>
+            );
+          })}  </div>
+
+        <Separator orientation="vertical" className="hidden md:block md:mx-8" />
+        <Separator orientation="horizontal" className=" md:hidden my-8" />
+
+
+        <div className="w-full md:flex-1">
+          <h1 className="text-2xl font-semibold">Pipeline Summary</h1>
+          <div className="flex flex-col w-full ">
+            {pipelineItems.map((stage) => {
+              return (
+                <Item key={stage.id} className="mt-3 md:p-[1.1rem]" variant="outline">
+                  <ItemContent>
+                    <div className="flex justify-between items-center w-full">
+                      <ItemTitle>{stage.name}</ItemTitle>
+                      <span className="text-lg font-medium">{stage.count}</span>
+                    </div>
+                    <ItemDescription>
+                      <span className="block text-sm text-muted-foreground">{stage.description}</span>
+                    </ItemDescription>
+                  </ItemContent>
+                </Item>
+              );
+            })}
+          </div>
+        </div>  </div>  </div>
   );
 }
