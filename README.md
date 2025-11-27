@@ -1,5 +1,8 @@
 CRM front-end project for my portfolio and for learning purposes. Back-end might be done, but I think its only going to be a front-end project
 
+
+##Important: This project currently has only a half-functionin UI, and further changes are need to be done before use, for example back-end work, better data handling.
+
 ## Getting Started
 
 First, run the development server:
