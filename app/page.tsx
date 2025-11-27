@@ -1,7 +1,6 @@
 
 
-"use server"
-import { DollarSign, DoorClosed, Handshake, User, Users } from "lucide-react";
+import { DollarSign, DoorClosed, Handshake, Users } from "lucide-react";
 import {
   Card,
   CardDescription,
@@ -21,27 +20,8 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-function fetchPipeline() {
-  // Mock data only, replace it with real DB logic
-  return {
-    lead: 32,
-    contacted: 18,
-    proposal: 9,
-    negotiation: 5,
-    won: 11,
-  }
-}
-function fetchLatestClients() {
-  // Mock data only, replace it with real DB logic
 
-  return [
-    { id: 1, avatar: "", name: "Client A", company: "", lastContact: "2024-06-10" },
-    { id: 2, avatar: "", name: "Client B", company: "", lastContact: "2024-06-09" },
-    { id: 3, avatar: "", name: "Client C", company: "", lastContact: "2024-06-08" },
-    { id: 4, avatar: "", name: "Client D", company: "", lastContact: "2024-06-07" },
-    { id: 5, avatar: "", name: "Client E", company: "", lastContact: "2024-06-07" },
-  ]
-}
+import { fetchLatestClients, fetchPipeline } from "@/dataHandler/handler"
 
 const pipelineItems = [
   { id: "lead", name: "Lead", count: fetchPipeline().lead, description: "New potential customers awaiting qualification." },
